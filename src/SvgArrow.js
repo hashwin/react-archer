@@ -175,6 +175,26 @@ const SvgArrow = ({
 
   const { xl, yl, wl, hl } = computeLabelDimensions(xs, ys, xe, ye);
 
+
+  let labelStyle = {
+    position: 'absolute',
+    top: '50%',
+    transform: 'translateX(-50%) translateY(-50%)',
+    pointerEvents: 'all'
+  }
+
+  if(pathType === 'right-angle') {
+    if(xa1 > xa2) {
+      labelStyle.right = 0
+      labelStyle.transform = 'translateX(50%) translateY(-50%)'
+    } else {
+      labelStyle.left = 0
+    }
+    labelStyle.top = '75%';
+  } else {
+    labelStyle.left = '50%'
+  }
+
   return (
     <g>
       <path
@@ -184,15 +204,7 @@ const SvgArrow = ({
       />
       {arrowLabel && (
         <foreignObject x={xl} y={yl} width={wl} height={hl} style={{overflow:'visible', pointerEvents: 'none'}}>
-          <div
-            style={{
-              position: 'absolute',
-              left: '50%',
-              top: '50%',
-              transform: 'translateX(-50%) translateY(-50%)',
-              pointerEvents: 'all'
-            }}
-          >
+          <div style={labelStyle}>
             <div>{arrowLabel}</div>
           </div>
         </foreignObject>
