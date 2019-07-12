@@ -15,6 +15,7 @@ type Props = {
   style?: Object,
   svgContainerStyle?: Object,
   className?: string,
+  pathType?: string
 };
 
 type SourceToTargetsArrayType = Array<SourceToTargetType>;
@@ -256,6 +257,7 @@ export class ArcherContainer extends React.Component<Props, State> {
           arrowLabel={label}
           arrowThickness={arrowThickness}
           arrowMarkerId={this.getMarkerId(source, target)}
+          pathType={this.props.pathType}
         />
       );
     });
