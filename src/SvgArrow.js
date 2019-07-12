@@ -123,6 +123,7 @@ const SvgArrow = ({
   strokeWidth,
   arrowLabel,
   arrowMarkerId,
+  pathType
 }: Props) => {
   const actualArrowLength = arrowLength * 2;
 
@@ -155,9 +156,22 @@ const SvgArrow = ({
     endingAnchor,
   );
   const { xa2, ya2 } = endingPosition;
+  let command;
+
+  switch(pathType) {
+    case 'smooth-curve':
+      command = 'C';
+      break;
+    case 'right-angle':
+      command = 'L';
+      break;
+    default:
+      command = 'C';
+      break;
+  }
 
   const pathString =
-    `M${xs},${ys} ` + `C${xa1},${ya1} ${xa2},${ya2} ` + `${xe},${ye}`;
+    `M${xs},${ys} ` + `${command}${xa1},${ya1} ${xa2},${ya2} ` + `${xe},${ye}`;
 
   const { xl, yl, wl, hl } = computeLabelDimensions(xs, ys, xe, ye);
 

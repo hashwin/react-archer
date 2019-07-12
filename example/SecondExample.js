@@ -11,7 +11,7 @@ const rowStyle = {
 const boxStyle = { padding: '10px', border: '1px solid black' };
 
 class SecondExample extends React.Component {
-  state = { nbElements: 3, labels: 'hello' };
+  state = { nbElements: 3, labels: 'hello', pathType: 'smooth-curve' };
 
   render = () => {
     return (
@@ -24,6 +24,15 @@ class SecondExample extends React.Component {
               this.setState({ labels: event.currentTarget.value });
             }}
           />
+        </div>
+        <div>
+          <div>Path type</div>
+          <select onChange={(event) => {
+            this.setState({ pathType: event.target.value });
+          }}>
+            <option value="smooth-curve">Smooth Curve</option>
+            <option value="right-angle">Right Angles</option>
+          </select>
         </div>
         <div>
           <div>Add elements</div>
@@ -45,7 +54,7 @@ class SecondExample extends React.Component {
             -
           </button>
         </div>
-        <ArcherContainer strokeColor="red">
+        <ArcherContainer strokeColor="red" pathType={this.state.pathType}>
           <div style={rootStyle}>
             <ArcherElement id="root">
               <div style={boxStyle}>Root</div>
